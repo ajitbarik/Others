@@ -1,0 +1,33 @@
+---
+title: "Plotly package"
+output: html_document
+---
+
+I came across this awesome package "plotly" which can be used create interactive plots with only line of codes.
+
+This package is not available in CRAN so you need to download it from github as "plotly" is in beta.
+
+
+```{r}
+library(plotly)
+set.seed(100)
+d <- diamonds[sample(nrow(diamonds), 1000), ]
+plot_ly(d, x = carat, y = price, text = paste("Clarity: ", clarity),
+        mode = "markers", color = carat, size = carat)
+```
+
+### Overlaid histograms
+```{r}
+
+plot_ly(x = rnorm(500), opacity = 0.6, type = "histogram") %>%
+  add_trace(x = rnorm(500)+1) %>%
+  layout(barmode="overlay")
+```
+
+### Polar scatter Chart
+```{r}
+p <- plot_ly(plotly::hobbs, r = r, t = t, color = nms, opacity = 0.7, mode = "markers")
+layout(p, title = "Hobbs-Pearson Trials", plot_bgcolor = toRGB("grey90"))
+```
+
+These are few example plots that you can make using "plotly", for more visit <https://plot.ly/feed/>
